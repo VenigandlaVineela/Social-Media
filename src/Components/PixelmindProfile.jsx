@@ -11,6 +11,7 @@ import p7 from "../assets/p7.png";
 import p8 from "../assets/p8.png";
 import Navbar from "../Components/Navbar"
 import Sidebar from "../Components/Sidebar"
+import { Link } from "react-router-dom";
 
 const TopSidebar = () => (
   <nav className="nav nav-pills justify-content-center mb-4">
@@ -66,7 +67,7 @@ const PixelmindProfile = () => {
               <button className="btn btn-light d-flex align-items-center gap-1">
                 <FiMessageSquare /> Message
               </button>
-              <button className="btn btn-warning text-white">+ Follow</button>
+              <Link to='/pixelmindprofileedited' className="btn btn-warning text-white">+ Follow</Link>
               <button className="btn btn-light" onClick={openAboutModal}><FaEllipsisH /></button>
               <button className="btn btn-light"><FaShareAlt /></button>
             </div>
