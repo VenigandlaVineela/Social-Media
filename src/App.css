@@ -1,0 +1,30 @@
+/* pixelmindprofile */
+/* Transparent backdrop with a slight dark overlay */
+.modal.fade .modal-dialog {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.3) !important; /* transparent black */
+}
+
+.modal-content {
+  background: #fff3eb; /* Keep your modal box color */
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+
+/* home */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #ffe0cc; /* apply here to cover whole page */
+}
