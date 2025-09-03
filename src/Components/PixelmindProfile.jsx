@@ -1,5 +1,12 @@
 import React, { useRef } from "react";
-import { FaArrowLeft, FaShareAlt, FaEllipsisH, FaGlobe, FaUserFriends, FaUserPlus } from "react-icons/fa";
+import {
+  FaArrowLeft,
+  FaShareAlt,
+  FaEllipsisH,
+  FaGlobe,
+  FaUserFriends,
+  FaUserPlus,
+} from "react-icons/fa";
 import { FiMessageSquare } from "react-icons/fi";
 import p1 from "../assets/p1.png";
 import p2 from "../assets/p2.png";
@@ -9,30 +16,52 @@ import p5 from "../assets/p5.png";
 import p6 from "../assets/p6.png";
 import p7 from "../assets/p7.png";
 import p8 from "../assets/p8.png";
-import Navbar from "../Components/Navbar"
-import Sidebar from "../Components/Sidebar"
-import { Link } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+import Sidebar from "../Components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 const TopSidebar = () => (
   <nav className="nav nav-pills justify-content-center mb-4">
-    <a className="nav-link active" href="#posts">Posts</a>
-    <a className="nav-link" href="#about">About</a>
-    <a className="nav-link" href="#followers">Followers</a>
-    <a className="nav-link" href="#following">Following</a>
+    <a className="nav-link active" href="#posts">
+      Posts
+    </a>
+    <a className="nav-link" href="#about">
+      About
+    </a>
+    <a className="nav-link" href="#followers">
+      Followers
+    </a>
+    <a className="nav-link" href="#following">
+      Following
+    </a>
   </nav>
 );
 
 const PixelmindProfile = () => {
   const images = [p1, p2, p3, p4, p5, p6, p7, p8];
   const aboutModalRef = useRef(null);
+  const navigate = useNavigate();
 
   const openAboutModal = () => {
     const modal = new window.bootstrap.Modal(aboutModalRef.current);
     modal.show();
   };
 
+  const handleFollow = () => {
+    // Close modal if it's open
+    if (aboutModalRef.current) {
+      const modal = window.bootstrap.Modal.getInstance(aboutModalRef.current);
+      if (modal) modal.hide();
+    }
+    // Navigate to edited profile page
+    navigate("/pixelmindprofileedited");
+  };
+
   return (
-    <div className="d-flex" style={{ minHeight: "100vh", backgroundColor: "#ffe0cc" }}>
+    <div
+      className="d-flex"
+      style={{ minHeight: "100vh", backgroundColor: "#ffe0cc" }}
+    >
       <Sidebar />
       <div className="flex-grow-1 d-flex flex-column">
         <Navbar />
@@ -56,7 +85,9 @@ const PixelmindProfile = () => {
             </div>
             <h3 className="fw-bold">Pixelmind Solution</h3>
             <p className="small mb-1 text-center">
-              <b>Pixelmindsolutions.com</b> "Welcome to our future tech house, your<br />
+              <b>Pixelmindsolutions.com</b> "Welcome to our future tech house,
+              your
+              <br />
               one-stop destination for cutting-edge digital solutions! <br />
               At our core, we're dedicated to crafting...{" "}
               <span style={{ cursor: "pointer", fontWeight: "bold" }}>more</span>
@@ -67,9 +98,18 @@ const PixelmindProfile = () => {
               <button className="btn btn-light d-flex align-items-center gap-1">
                 <FiMessageSquare /> Message
               </button>
-              <Link to='/pixelmindprofileedited' className="btn btn-warning text-white">+ Follow</Link>
-              <button className="btn btn-light" onClick={openAboutModal}><FaEllipsisH /></button>
-              <button className="btn btn-light"><FaShareAlt /></button>
+              <button
+                className="btn btn-warning text-white"
+                onClick={handleFollow}
+              >
+                + Follow
+              </button>
+              <button className="btn btn-light" onClick={openAboutModal}>
+                <FaEllipsisH />
+              </button>
+              <button className="btn btn-light">
+                <FaShareAlt />
+              </button>
             </div>
           </div>
 
@@ -84,7 +124,11 @@ const PixelmindProfile = () => {
           >
             {images.map((img, index) => (
               <div key={index}>
-                <img src={img} alt={`post-${index}`} className="img-fluid rounded" />
+                <img
+                  src={img}
+                  alt={`post-${index}`}
+                  className="img-fluid rounded"
+                />
               </div>
             ))}
           </div>
@@ -115,14 +159,21 @@ const PixelmindProfile = () => {
             </div>
 
             <p className="text-dark small mb-3">
-              Unlock your business potential with our excellent IT services designed to drive success. Tailored solutions to seamless support, we ensure your technology works for you, every step of the way.
+              Unlock your business potential with our excellent IT services
+              designed to drive success. Tailored solutions to seamless support,
+              we ensure your technology works for you, every step of the way.
             </p>
 
             <div className="d-flex justify-content-between">
               <button className="btn btn-light d-flex align-items-center gap-1">
                 <FiMessageSquare /> Message
               </button>
-              <button className="btn btn-warning text-white">+ Follow</button>
+              <button
+                className="btn btn-warning text-white"
+                onClick={handleFollow}
+              >
+                + Follow
+              </button>
             </div>
 
             <button
