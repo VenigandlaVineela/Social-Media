@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { CiHeart } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FaRegComment,
   FaStar,
@@ -28,7 +28,12 @@ import img13 from "../assets/img13.png";
 import profilePic from "../assets/profile.png";
 
 const Home = () => {
-  const images = [img1,img2,img3,img4,img5,img6,img7,img8,img3,img2,img9,img13,img1,img2,img3,img4,img5,img6,img7];
+  const navigate = useNavigate();
+
+  const images = [
+    img1, img2, img3, img4, img5, img6, img7, img8,
+    img3, img2, img9, img13, img1, img2, img3, img4, img5, img6, img7
+  ];
 
   const [currentImg, setCurrentImg] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -74,8 +79,7 @@ const Home = () => {
     document.body.removeChild(link);
 
     if (window.bootstrap && downloadConfirmRef.current) {
-      const modal =
-        window.bootstrap.Modal.getInstance(downloadConfirmRef.current);
+      const modal = window.bootstrap.Modal.getInstance(downloadConfirmRef.current);
       modal.hide();
     }
   };
@@ -85,6 +89,15 @@ const Home = () => {
       const modal = new window.bootstrap.Modal(shareModalRef.current);
       modal.show();
     }
+  };
+
+  // ✅ helper to close modal and navigate
+  const goToProfile = () => {
+    if (window.bootstrap && modalRef.current) {
+      const modal = window.bootstrap.Modal.getInstance(modalRef.current);
+      if (modal) modal.hide();
+    }
+    navigate("/pixelmindprofile");
   };
 
   return (
@@ -97,28 +110,6 @@ const Home = () => {
       </div>
       <div className="flex-grow-1 d-flex flex-column">
         <Navbar />
-
-       
-        {/* <div className="container mt-3">
-          <div className="row g-3">
-            {images.map((imgSrc, idx) => (
-              <div className="col-md-3 col-sm-6 col-12" key={idx}>
-                <div className="position-relative rounded overflow-hidden">
-                  <img
-                    src={imgSrc}
-                    className="img-fluid rounded"
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                      display: "block",
-                      cursor: "pointer",
-                    }}
-                    alt={`img-${idx}`}
-                    onClick={() => openModal(imgSrc, idx)}
-                  /> */}
-
-
 
         {/* Masonry Image Grid */}
         <div className="container mt-3">
@@ -135,7 +126,6 @@ const Home = () => {
                   className="img-fluid rounded"
                   style={{
                     objectFit: "cover",
-
                     width: "100%",
                     display: "block",
                   }}
@@ -181,7 +171,6 @@ const Home = () => {
                   </button>
                 </div>
               </div>
-
             ))}
           </div>
         </div>
@@ -267,9 +256,13 @@ const Home = () => {
                       P
                     </div>
                     <div className="ms-2 d-flex align-items-center justify-content-between w-100">
-                      <div className="fw-bold">
-                        <Link to='/pixelmindprofile'>  Pixelmind Solution</Link>
-                        </div>
+                      <div
+                        className="fw-bold"
+                        style={{ cursor: "pointer" }}
+                        onClick={goToProfile}   // ✅ navigate with modal close
+                      >
+                        Pixelmind Solution
+                      </div>
                       <button className="btn btn-sm btn-warning ms-2">
                         Follow
                       </button>
@@ -447,8 +440,7 @@ const Home = () => {
                       style={{
                         width: 35,
                         height: 35,
-                        backgroundColor:
-                          idx % 2 === 0 ? "#f7d6f4" : "#d2f4ea",
+                        backgroundColor: idx % 2 === 0 ? "#f7d6f4" : "#d2f4ea",
                         color: "#000",
                         fontWeight: "bold",
                       }}
@@ -516,8 +508,7 @@ const Home = () => {
           background-color: #ffe066;
         }
 
-
-         .masonry-grid {
+        .masonry-grid {
           column-count: 4;
           column-gap: 1rem;
         }
@@ -535,7 +526,7 @@ const Home = () => {
           .masonry-grid { column-count: 1; }
         }
       `}</style>
-    </div >
+    </div>
   );
 };
 
